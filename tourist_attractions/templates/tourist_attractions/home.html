@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "tourist_attractions/base.html" %}
+
+
+<head>
+{% load static %}
+
+{% block head %}
+<link rel='stylesheet' href="{% static 'tourist_attractions/style.css' %}">
+{% endblock %}
+</head>
+<body>
+{% block content %}
+<h1> This is a list of attractions in America!</h1>
+
+
+<table> <tr>
+   <th> Attraction </th>
+  <th> State </th>
+  <th> State Details </th>
+  </tr>
+
+    {% for value in attractions|dictsort:"state"%}
+   <tr>
+     <td> {{ value.attraction_name }} </td>
+     <td> {{ value.state }} </td>
+     <td> <a href="{% url 'details' value.state|slugify %}">State details</a>
+ </td>
+     </tr>
+    {%endfor%}
+
+  </table>
+
+{% endblock %}
+</body>
